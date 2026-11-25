@@ -44,7 +44,7 @@ body.at-end .fine{opacity:0}
 #stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--green)}
 .scene{position:absolute;inset:0;overflow:hidden}
 #sHero{background:radial-gradient(70% 70% at var(--cx,50%) 55%, #0a3a28 0%, #062f20 45%, var(--green) 100%)}
-#sBrew{background:var(--cream);clip-path:circle(0px at 50% 50%)}
+#sBrew{background:var(--cream);clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%)}
 #sMacro{opacity:0;visibility:hidden;background:#2a1305}
 #sFlav{opacity:0;visibility:hidden;background:var(--fbg,#e9dcc8);perspective:1600px}
 #sEnd{background:var(--green);clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%)}
@@ -179,8 +179,8 @@ body.at-end .fine{opacity:0}
 
     <!-- 3 · the dive -->
     <section class="scene" id="sMacro" aria-label="Inside the cup">
-      <img id="mMilk" src="img/mac-milk.webp" srcset="img/mac-milk.webp 1536w, img/mac-milk@2x.webp 3072w" sizes="110vw" alt="Macro: milk blooming into dark tea">
-      <img id="mPearl" src="img/mac-pearls.webp" srcset="img/mac-pearls.webp 1536w, img/mac-pearls@2x.webp 3072w" sizes="110vw" alt="Macro: tapioca pearls sinking through milk tea">
+      <picture><source media="(max-aspect-ratio: 9/10)" srcset="img/mac-milk-v.webp 1024w, img/mac-milk-v@2x.webp 2048w" sizes="72vh"><img id="mMilk" src="img/mac-milk.webp" srcset="img/mac-milk.webp 1536w, img/mac-milk@2x.webp 3072w" sizes="(max-aspect-ratio: 3/2) 162vh, 108vw" alt="Macro: milk blooming into dark tea"></picture>
+      <picture><source media="(max-aspect-ratio: 9/10)" srcset="img/mac-pearls-v.webp 1024w, img/mac-pearls-v@2x.webp 2048w" sizes="72vh"><img id="mPearl" src="img/mac-pearls.webp" srcset="img/mac-pearls.webp 1536w, img/mac-pearls@2x.webp 3072w" sizes="(max-aspect-ratio: 3/2) 162vh, 108vw" alt="Macro: tapioca pearls sinking through milk tea"></picture>
       <div class="shade"></div>
       <div class="mcopy" id="mc1"><div class="eyebrow">Inside the cup</div><h2>Milk meets <em>tea.</em></h2></div>
       <div class="mcopy" id="mc2"><div class="eyebrow">Slowly, now</div><h2>Pearls, <em>sinking.</em></h2></div>

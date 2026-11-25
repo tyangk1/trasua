@@ -39,7 +39,8 @@
   const LV = { s0: .915, t1: .71, t2: .51, t3: .30 };
   // the brew, as transitions between photos
   const T = [
-    { a: .100, b: .145, from: 's4', to: 's0', type: 'drain' },
+    { a: .098, b: .114, from: 's4', to: 's3', type: 'lidoff' },
+    { a: .116, b: .150, from: 's3', to: 's0', type: 'drain' },
     { a: .155, b: .190, from: 's0', to: 't1', type: 'pour' },
     { a: .190, b: .225, from: 't1', to: 't2', type: 'rise' },
     { a: .225, b: .260, from: 't2', to: 't3', type: 'rise' },
@@ -81,9 +82,14 @@
       case 'drain': { // the finished cup empties from the top down
         const e = io(t);
         A.style.zIndex = 2; B.style.zIndex = 1;
-        A.style.clipPath = wave(lerp(0, LV.s0 + .03, e), (.012 * Math.sin(e * Math.PI) + .002) * amp, -time * .35);
+        A.style.clipPath = wave(lerp(.2, LV.s0 + .03, e), (.012 * Math.sin(e * Math.PI) + .002) * amp, -time * .35);
         return;
       }
+      case 'lidoff': // the lid lifts away before the cup drains
+        A.style.zIndex = 2; B.style.zIndex = 1;
+        A.style.opacity = 1 - io(t);
+        A.style.translate = `0 ${(-io(t) * L.bh * .06).toFixed(2)}px`;
+        return;
       case 'pour': // tea falls in from the top
         A.style.zIndex = 1; B.style.zIndex = 2;
         setMask(B, feather('180deg', io(t), .06));
@@ -161,10 +167,9 @@
     cHero.style.translate = `0 ${-60 * io(hx)}px`;
     w1968.style.transform = `translate(calc(-50% + ${(mx * 18).toFixed(1)}px), ${(-H * .06 * io(seg(p, 0, .1))).toFixed(1)}px)`;
 
-    // HERO -> CREAM: a circle opens from the cup
-    const r = io(seg(p, .05, .1));
-    const R = Math.hypot(Math.max(L.cx, W - L.cx), Math.max(L.cy, H - L.cy));
-    sBrew.style.clipPath = r >= 1 ? 'none' : `circle(${(r * R).toFixed(1)}px at ${L.cx}px ${L.cy}px)`;
+    // HERO -> CREAM: cream rises over the green like a liquid
+    const r = io(seg(p, .045, .1));
+    sBrew.style.clipPath = r <= 0 ? 'polygon(0 100%,100% 100%,100% 100%,0 100%)' : r >= 1 ? 'none' : wave(1 - r * 1.05, (.022 * (1 - r) + .004) * (reduce ? 0 : 1), time * .3, 1.1);
 
     frames(p);
 
@@ -179,7 +184,7 @@
     sMacro.style.opacity = mo; sMacro.style.visibility = mo > .001 ? 'visible' : 'hidden';
     if (mo > .001) {
       const k1 = seg(p, .415, .5);
-      mMilk.style.transform = `scale(${(1.45 - .3 * out(k1)).toFixed(3)}) translate(${(-1.5 * k1).toFixed(2)}%, ${(1 * k1).toFixed(2)}%)`;
+      mMilk.style.transform = `scale(${(1.3 - .22 * out(k1)).toFixed(3)}) translate(${(-1.5 * k1).toFixed(2)}%, ${(1 * k1).toFixed(2)}%)`;
       mPearl.style.opacity = seg(p, .48, .5);
       const k2 = seg(p, .48, .565);
       mPearl.style.transform = `scale(${(1.08 + .1 * k2).toFixed(3)}) translateY(${(-3 + 6 * k2).toFixed(2)}%)`;
@@ -288,7 +293,7 @@
   addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse') tmx = (e.clientX / innerWidth - .5) * 2; }, { passive: true });
   gsap.ticker.add((t, dt) => {
     time += dt / 1000; mx += (tmx - mx) * .06;
-    const live = (cur > .1 && cur < .26) || cur > .66 || Math.abs(tmx - mx) > .001;
+    const live = (cur > .04 && cur < .26) || cur > .66 || Math.abs(tmx - mx) > .001;
     if (live) render(cur);
   });
 
