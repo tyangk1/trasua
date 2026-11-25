@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Brewed since 1968 · an unofficial Phuc Long fan concept</title>
+<meta name="description" content="Unofficial fan concept: scroll to brew a cup of Vietnamese milk tea, layer by layer. Not affiliated with Phuc Long.">
+<meta name="theme-color" content="#0E4A31">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Brewed since 1968 · a scroll-to-brew fan concept">
+<meta property="og:description" content="Scroll to brew a milk tea, layer by layer.">
+<meta property="og:image" content="https://trasua.yan.io.vn/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<script defer src="https://stats.yan.io.vn/script.js" data-website-id="19caaa6e-4f47-4e3b-a84a-818e8b12f0ab" data-domains="trasua.yan.io.vn"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--g:#0E4A31;--g2:#0A3A26;--cream:#F4ECDD;--ink:#123B29;--gold:#C9A45C;--sans:'Jost',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--g);color:var(--cream);-webkit-font-smoothing:antialiased}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{font-family:var(--sans);overflow-x:clip}
+#stage{position:relative;height:100svh;min-height:620px;overflow:hidden}
+.bg{position:absolute;inset:0}
+#bgGreen{background:radial-gradient(120% 80% at 50% 70%,#145C3E 0%,var(--g) 45%,var(--g2) 100%)}
+#bgCream{background:radial-gradient(120% 90% at 50% 65%,#FBF5EA 0%,var(--cream) 55%,#EADFCB 100%);clip-path:circle(0px at 50% 70%);will-change:clip-path}
+#bgFlav{opacity:0}
+.col{position:absolute;top:0;height:100%;will-change:transform}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.18;background-image:radial-gradient(rgba(0,0,0,.25) .5px,transparent .6px);background-size:5px 5px;mix-blend-mode:multiply}
+.nav{position:absolute;left:0;right:0;top:0;height:64px;display:flex;align-items:center;gap:18px;padding:0 22px;z-index:20;transition:color .4s}
+.nav b{font:600 20px/1 var(--serif);letter-spacing:.08em}
+.nav i{flex:1;height:1px;background:currentColor;opacity:.45}
+.nav span{width:22px;height:12px;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;position:relative}
+.nav span:after{content:"";position:absolute;left:0;right:0;top:4px;border-top:1.5px solid currentColor}
+.copy{position:absolute;left:0;right:0;text-align:center;z-index:12;pointer-events:none;padding:0 20px}
+.kick{font:500 11px/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+.h1{font:500 clamp(46px,12.5vw,104px)/.98 var(--serif);letter-spacing:-.01em;margin-top:14px}
+.h1 em{font-style:italic}
+.sub{font:italic 500 clamp(15px,4vw,19px)/1.5 var(--serif);margin-top:12px;opacity:.85}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;color:var(--gold)}
+.orn i{width:60px;height:1px;background:currentColor}
+#c1{top:84px}
+#c2{top:84px;color:var(--ink);opacity:0}
+#c2 .kick{color:#8C6A2E}
+#ring{position:absolute;z-index:3;pointer-events:none;opacity:.55}
+#ring text{font:500 13px var(--sans);letter-spacing:.32em;fill:var(--gold)}
+.cup{position:absolute;left:0;top:0;z-index:6;will-change:transform,opacity;pointer-events:none}
+.cup img{display:block;width:100%;height:auto}
+.cup::after{content:"";position:absolute;left:12%;right:12%;bottom:-3%;height:7%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.38),rgba(0,0,0,0));z-index:-1}
+#brewCv{position:absolute;inset:0;z-index:5;pointer-events:none}
+#body,#lid{position:absolute;left:0;top:0;z-index:7;pointer-events:none;will-change:transform,opacity;opacity:0}
+#lid{z-index:8}
+#plinth{position:absolute;z-index:4;opacity:0;border-radius:50%;background:radial-gradient(closest-side,rgba(60,40,20,.28),rgba(60,40,20,0));pointer-events:none}
+.ing{position:absolute;left:0;top:0;z-index:9;pointer-events:none;will-change:transform,opacity;opacity:0}
+.ing img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 12px rgba(40,25,10,.25))}
+.leafF{position:absolute;left:0;top:0;z-index:11;pointer-events:none;opacity:.9;will-change:transform}
+.leafF img{display:block;width:100%}
+#step{position:absolute;left:0;right:0;z-index:12;text-align:center;color:var(--ink);opacity:0;pointer-events:none}
+#step b{display:block;font:500 11px/1 var(--sans);letter-spacing:.34em;color:#8C6A2E}
+#step span{display:block;font:italic 500 clamp(20px,5.5vw,30px)/1.2 var(--serif);margin-top:8px}
+#word{position:absolute;left:0;right:0;z-index:4;text-align:center;font:600 clamp(80px,26vw,300px)/.85 var(--serif);letter-spacing:-.02em;pointer-events:none;white-space:nowrap;opacity:0}
+#word span{display:inline-block}
+#flavName{position:absolute;left:0;right:0;z-index:12;text-align:center;opacity:0;pointer-events:none}
+#flavName b{display:block;font:500 11px/1 var(--sans);letter-spacing:.34em}
+#flavName span{display:block;font:italic 500 clamp(18px,5vw,26px)/1.3 var(--serif);margin-top:8px}
+#dots{position:absolute;left:0;right:0;z-index:14;display:flex;justify-content:center;gap:14px;opacity:0}
+#dots button{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.7);cursor:pointer;background-size:cover;background-position:center;transition:transform .3s,box-shadow .3s}
+#dots button:focus-visible{outline:2px solid #fff;outline-offset:4px}
+#dots button.on{transform:scale(1.15);box-shadow:0 0 0 3px rgba(255,255,255,.95)}
+.cue{position:absolute;left:0;right:0;bottom:46px;text-align:center;z-index:12;font:500 11px/1 var(--sans);letter-spacing:.34em;color:var(--cream);pointer-events:none}
+.cue i{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(currentColor,transparent);animation:cue 1.8s ease-in-out infinite;transform-origin:50% 0}
+@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.legal{position:absolute;left:0;right:0;bottom:10px;text-align:center;z-index:12;font:400 9px/1.4 var(--sans);letter-spacing:.08em;opacity:.6;padding:0 16px}
+#end{position:relative;min-height:100svh;background:radial-gradient(120% 80% at 50% 30%,#145C3E,var(--g) 50%,var(--g2));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 22px 40px;overflow:hidden}
+#end .h1{font-size:clamp(44px,12vw,100px)}
+#end img{width:min(46vw,250px);margin:30px auto 0;filter:drop-shadow(0 26px 26px rgba(0,0,0,.35))}
+#again{margin-top:26px;font:500 12px/1 var(--sans);letter-spacing:.3em;color:var(--cream);background:none;border:1px solid rgba(244,236,221,.6);padding:15px 24px;cursor:pointer;border-radius:40px}
+#again:hover{background:var(--cream);color:var(--g)}
+#end .foot{margin-top:34px;font:400 10px/1.6 var(--sans);letter-spacing:.08em;opacity:.65;max-width:560px}
+@media (prefers-reduced-motion:reduce){.cue i{animation:none}}
+</style>
+</head>
+<body>
+<main>
+<section id="stage" aria-label="Brew a cup by scrolling">
+  <div class="bg" id="bgGreen"></div><div class="bg" id="bgCream"></div><div class="bg" id="bgFlav"></div>
+  <div class="grain"></div>
+  <svg id="ring" viewBox="-200 -200 400 400" aria-hidden="true"><defs><path id="rp" d="M-170,0 a170,170 0 1,1 340,0 a170,170 0 1,1 -340,0"/></defs><text><textPath href="#rp">VIETNAMESE HERITAGE · SINCE 1968 · PREMIUM TEA &amp; COFFEE · VIETNAMESE HERITAGE · SINCE 1968 · PREMIUM TEA &amp; COFFEE ·</textPath></text></svg>
+  <div id="word" aria-hidden="true"></div>
+  <div id="plinth"></div>
+  <canvas id="brewCv" aria-hidden="true"></canvas>
+  <div class="cup" data-k="matcha"><img src="img/cup-matcha.webp" alt="Matcha latte"></div>
+  <div class="cup" data-k="peach"><img src="img/cup-peach.webp" alt="Peach tea"></div>
+  <div class="cup" data-k="coffee"><img src="img/cup-coffee.webp" alt="Iced milk coffee"></div>
+  <div class="cup" data-k="milktea"><img src="img/cup-milktea.webp" alt="Milk tea with pearls"></div>
+  <img id="body" src="img/cup-body.webp" alt=""><img id="lid" src="img/cup-lid.webp" alt="">
+  <div class="ing" data-i="leaves"><img src="img/ing-leaves.webp" alt=""></div>
+  <div class="ing" data-i="peach"><img src="img/ing-peach.webp" alt=""></div>
+  <div class="ing" data-i="pearl"><img src="img/ing-pearl.webp" alt=""></div>
+  <div class="ing" data-i="matcha"><img src="img/ing-matcha.webp" alt=""></div>
+  <div class="ing" data-i="beans"><img src="img/ing-beans.webp" alt=""></div>
+  <div class="ing" data-i="leaf"><img src="img/ing-leaf.webp" alt=""></div>
+  <div class="copy" id="c1"><div class="kick">Vietnamese tea house</div><h1 class="h1">Brewed <em>since 1968.</em></h1><p class="sub">Vietnamese tea heritage in every cup.</p><div class="orn"><i></i>❦<i></i></div></div>
+  <div class="copy" id="c2"><div class="kick">The ritual</div><h2 class="h1" style="font-size:clamp(38px,10vw,84px)">Every cup, <em>built layer by layer.</em></h2></div>
+  <div id="step"><b></b><span></span></div>
+  <div id="flavName"><b></b><span></span></div>
+  <div id="dots" role="group" aria-label="Pick a drink"><button data-f="0" aria-label="Milk tea" style="background-image:url(img/cup-milktea.webp)"></button><button data-f="1" aria-label="Peach tea" style="background-image:url(img/cup-peach.webp)"></button><button data-f="2" aria-label="Matcha latte" style="background-image:url(img/cup-matcha.webp)"></button><button data-f="3" aria-label="Milk coffee" style="background-image:url(img/cup-coffee.webp)"></button></div>
+  <div class="cue" id="cue">SCROLL TO BREW<i></i></div>
+  <div class="legal" id="legal">Unofficial fan concept. Not affiliated with or endorsed by Phuc Long. Images are AI-generated.</div>
+  <header class="nav" id="nav"><b>PHUC LONG</b><i></i><span aria-hidden="true"></span></header>
+</section>
+<section id="end" aria-label="Brewed since 1968">
+  <div class="kick">Vietnamese tea house · since 1968</div>
+  <h2 class="h1">Brewed <em>since 1968.</em></h2>
+  <p class="sub">Every cup, built layer by layer.</p>
+  <img src="img/cup-milktea.webp" alt="Milk tea with pearls">
+  <button id="again">BREW ANOTHER ↑</button>
+  <p class="foot">Unofficial fan concept by Web Atelier. Not affiliated with or endorsed by Phuc Long Heritage or its owners. Drink and ingredient images are AI-generated illustrations. Nothing is sold here.</p>
+</section>
+</main>
+<script src="img/cup.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="brew.js"></script>
+</body>
+</html>
